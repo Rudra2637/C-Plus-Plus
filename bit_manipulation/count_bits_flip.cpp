@@ -41,13 +41,20 @@ namespace count_bits_flip {
  * @returns total number of bits needed to be flipped to convert A to B
  */
 std::uint64_t countBitsFlip(
-    std::int64_t A,
-    std::int64_t B) {  // int64_t is preferred over int so that
-                       // no Overflow can be there.
+    std::uint64_t A,
+    std::uint64_t B) {  // uint64_t is preferred over int so that
+                        // no Overflow can be there.
+                        //It's preferred over int64_t because it Guarantees that inputs are always non-negative, 
+                        //which matches the algorithmic problem statement.
+                        //set bit counting is conceptually defined only for non-negative numbers.
+                        //Provides a type Safety: Using an unsigned type helps prevent accidental negative values,
 
-    int count =
+     std::uint64_t count =
         0;  // "count" variable is used to count number of bits flip of the
             // number A to form B in binary representation of number 'n'
+            //Count is uint64_t because it Prevents theoretical overflow if someone passes very large integers.
+            //  Behavior stays the same for all normal inputs.
+            // Safer for edge cases.
     A = A ^ B;
     while (A) {
         A = A & (A - 1);
